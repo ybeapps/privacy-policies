@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="שאלות נפוצות - תיאוריה לרישיון נהיגה | Theory Driving Exam App FAQ">
+  <title>תיאוריה - שאלות נפוצות | Theory App FAQ</title>
+  <style>
+    :root {
+      --green: #4CAF50;
+      --green-dark: #388E3C;
+      --green-light: #E8F5E9;
+      --text: #212121;
+      --text-secondary: #757575;
+      --border: #E0E0E0;
+      --bg: #FAFAFA;
+      --card-bg: #FFFFFF;
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+      color: white;
+      padding: 40px 20px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .app-icon {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border-radius: 18px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+    header .subtitle {
+      font-size: 1.05rem;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+    .appstore-btn {
+      display: inline-block;
+      background: white;
+      color: var(--green-dark);
+      text-decoration: none;
+      padding: 10px 24px;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .appstore-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+
+    /* Lang toggle */
+    .lang-bar {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+    }
+    .lang-btn {
+      padding: 10px 28px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border-bottom: 3px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .lang-btn.active { color: var(--green); border-bottom-color: var(--green); }
+    .lang-btn:hover { color: var(--green); }
+
+    /* Main */
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 32px 16px 60px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 32px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--green-light);
+    }
+
+    /* FAQ Cards */
+    .faq-item {
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      margin-bottom: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.15s;
+    }
+    .faq-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+
+    .faq-question {
+      width: 100%;
+      text-align: right;
+      background: none;
+      border: none;
+      padding: 18px 20px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .faq-question[dir="ltr"] { text-align: left; flex-direction: row-reverse; }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: var(--green-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background: var(--green);
+      color: white;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 20px 18px;
+      color: var(--text-secondary);
+      font-size: 0.97rem;
+      line-height: 1.8;
+      border-top: 1px solid var(--green-light);
+    }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-answer[dir="ltr"] { text-align: left; }
+
+    .faq-answer a {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .faq-answer a:hover { text-decoration: underline; }
+
+    .badge {
+      display: inline-block;
+      background: var(--green);
+      color: white;
+      border-radius: 12px;
+      padding: 2px 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-inline-start: 6px;
+      vertical-align: middle;
+    }
+    .badge.free { background: #2196F3; }
+    .badge.paid { background: #FF9800; }
+    .badge.bike { background: #9C27B0; }
+
+    /* Variants section */
+    .variants-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .variant-card {
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+    .variant-card.free { background: #E3F2FD; border: 1px solid #90CAF9; }
+    .variant-card.paid { background: #FFF3E0; border: 1px solid #FFCC80; }
+    .variant-card.bike { background: #F3E5F5; border: 1px solid #CE93D8; }
+    .variant-card h3 { font-size: 1rem; margin-bottom: 6px; }
+    .variant-card p { font-size: 0.88rem; color: var(--text-secondary); }
+
+    /* Languages */
+    .lang-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .lang-chip {
+      background: var(--green-light);
+      color: var(--green-dark);
+      padding: 4px 14px;
+      border-radius: 16px;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    /* Contact */
+    .contact-card {
+      background: var(--green-light);
+      border: 1px solid #A5D6A7;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      margin-top: 16px;
+    }
+    .contact-card .email {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+    .contact-card p { color: var(--text-secondary); margin-top: 8px; font-size: 0.95rem; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Hidden by lang */
+    [data-lang="en"] { display: none; }
+    body.lang-en [data-lang="he"] { display: none; }
+    body.lang-en [data-lang="en"] { display: block; }
+    body.lang-en { direction: ltr; }
+    body.lang-en main { direction: ltr; }
+
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.5rem; }
+      .faq-question { font-size: 0.97rem; }
+      main { padding: 20px 12px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="app-icon">🚗</div>
+  <h1>תיאוריה — שאלות נפוצות</h1>
+  <p class="subtitle">אפליקציית הכנה לבחינת תיאוריה לרישיון נהיגה</p>
+  <a class="appstore-btn" href="https://apps.apple.com/il/app/theory-driving-exam/id586093528" target="_blank">⬇ הורד באפ סטור</a>
+</header>
+
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('he')">עברית</button>
+  <button class="lang-btn" onclick="setLang('en')">English</button>
+</div>
+
+<main>
+
+  <!-- ══════════ HEBREW CONTENT ══════════ -->
+  <div data-lang="he">
+
+    <div class="section-title">שאלות נפוצות</div>
+
+    <!-- Q1: Reset progress -->
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span>איך מאפסים התקדמות?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>כדי לאפס את כל ההתקדמות שלך באפליקציה:</p>
+        <ol style="margin: 10px 0 0 20px; direction: rtl;">
+          <li>פתח את <strong>הגדרות</strong> (Settings) במכשיר</li>
+          <li>גלול ומצא את <strong>תיאוריה</strong></li>
+          <li>לחץ על <strong>"אפס נתונים"</strong> / Reset Data</li>
+        </ol>
+        <p style="margin-top: 10px; color: #D32F2F;">⚠️ פעולה זו בלתי הפיכה — כל השאלות שנלמדו ימחקו.</p>
+      </div>
+    </div>
+
+    <!-- Q2: Change language -->
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span>איך משנים שפה?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>שינוי השפה נעשה דרך הגדרות המכשיר:</p>
+        <ol style="margin: 10px 0 0 20px; direction: rtl;">
+          <li>פתח <strong>הגדרות ← כללי ← שפה ואזור</strong></li>
+          <li>הוסף או שנה את שפת המכשיר</li>
+          <li>הפעל מחדש את האפליקציה</li>
+        </ol>
+        <p style="margin-top: 10px;">השאלות מוצגות בשפה שהגדרת. ניתן גם לבחור שפת שאלות ספציפית מתפריט הקטגוריות בתוך האפליקציה.</p>
+        <div class="lang-chips">
+          <span class="lang-chip">עברית</span>
+          <span class="lang-chip">ערבית</span>
+          <span class="lang-chip">English</span>
+          <span class="lang-chip">Русский</span>
+          <span class="lang-chip">Français</span>
+          <span class="lang-chip">Español</span>
+          <span class="lang-chip">አማርኛ</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3: Free vs Paid -->
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span>מה ההבדל בין Free ל-Paid?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="variants-grid">
+          <div class="variant-card free">
+            <h3>תיאוריה Free <span class="badge free">Free</span></h3>
+            <p>גישה לחלק מהשאלות — מושלם להתחלה ולהתנסות.</p>
+          </div>
+          <div class="variant-card paid">
+            <h3>תיאוריה <span class="badge paid">Paid</span></h3>
+            <p>כל השאלות, כולל עדכונים עתידיים. ללא הגבלות.</p>
+          </div>
+          <div class="variant-card bike">
+            <h3>תיאוריה A3 <span class="badge bike">אופניים</span></h3>
+            <p>מותאם לבחינת רישיון אופניים חשמליים A3.</p>
+          </div>
+        </div>
+        <p>הגרסה המלאה (Paid) כוללת את כל מאגר השאלות הרשמי, מוקטגורות לפי: חוקי תנועה, תמרורים, ידע ברכב, ועוד.</p>
+      </div>
+    </div>
+
+    <!-- Q4: A3 bicycle -->
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span>מה זה אופניים חשמליים A3?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>גרסת <strong>A3</strong> מיועדת למי שנדרש לגשת לבחינת תיאוריה לאופניים חשמליים.</p>
+        <p style="margin-top: 8px;">בישראל, אופניים חשמליים ברמה A3 (מהירות עד 45 קמ"ש) מחייבים בחינת תיאוריה ייעודית. האפליקציה כוללת את כל חומר הלימוד הרלוונטי: חוקים, תמרורים, ובטיחות בדרכים לרוכבי אופניים.</p>
+      </div>
+    </div>
+
+    <!-- Q5: Multiple languages in questions -->
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span>למה יש שאלות בשפות שונות?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>בחינת התיאוריה בישראל מוצעת ב-7 שפות רשמיות. האפליקציה כוללת את כל השאלות בכל השפות הזמינות, כדי שתוכל להתאמן בשפה שנוחה לך ביותר.</p>
+        <p style="margin-top: 8px;">ניתן לסנן שאלות לפי שפה ספציפית מתוך תפריט הקטגוריות.</p>
+      </div>
+    </div>
+
+    <!-- Q6: Contact -->
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span>איך יוצרים קשר?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="contact-card">
+          <p>לשאלות, הצעות ובעיות טכניות:</p>
+          <div class="email"><a href="mailto:ybeapps@gmail.com">ybeapps@gmail.com</a></div>
+          <p>אנחנו משתדלים לענות תוך 24-48 שעות.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /data-lang=he -->
+
+
+  <!-- ══════════ ENGLISH CONTENT ══════════ -->
+  <div data-lang="en" dir="ltr">
+
+    <div class="section-title" style="text-align:left;">Frequently Asked Questions</div>
+
+    <!-- Q1 EN -->
+    <div class="faq-item">
+      <button class="faq-question" dir="ltr" onclick="toggle(this)">
+        <span>How do I reset my progress?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer" dir="ltr">
+        <p>To reset all your progress in the app:</p>
+        <ol style="margin: 10px 0 0 20px;">
+          <li>Open the device <strong>Settings</strong> app</li>
+          <li>Scroll down and tap <strong>Theory</strong></li>
+          <li>Tap <strong>"Reset Data"</strong></li>
+        </ol>
+        <p style="margin-top: 10px; color: #D32F2F;">⚠️ This action is irreversible — all learned questions will be erased.</p>
+      </div>
+    </div>
+
+    <!-- Q2 EN -->
+    <div class="faq-item">
+      <button class="faq-question" dir="ltr" onclick="toggle(this)">
+        <span>How do I change the language?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer" dir="ltr">
+        <p>Language is controlled by your device settings:</p>
+        <ol style="margin: 10px 0 0 20px;">
+          <li>Open <strong>Settings → General → Language &amp; Region</strong></li>
+          <li>Add or change your preferred language</li>
+          <li>Restart the app</li>
+        </ol>
+        <p style="margin-top: 10px;">You can also filter questions by a specific language from the category menu inside the app.</p>
+        <div class="lang-chips" style="justify-content:flex-start;">
+          <span class="lang-chip">עברית</span>
+          <span class="lang-chip">ערבית</span>
+          <span class="lang-chip">English</span>
+          <span class="lang-chip">Русский</span>
+          <span class="lang-chip">Français</span>
+          <span class="lang-chip">Español</span>
+          <span class="lang-chip">አማርኛ</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 EN -->
+    <div class="faq-item">
+      <button class="faq-question" dir="ltr" onclick="toggle(this)">
+        <span>What's the difference between Free and Paid?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer" dir="ltr">
+        <div class="variants-grid">
+          <div class="variant-card free">
+            <h3>Theory Free <span class="badge free">Free</span></h3>
+            <p>Access to a subset of questions — great for trying the app.</p>
+          </div>
+          <div class="variant-card paid">
+            <h3>Theory <span class="badge paid">Paid</span></h3>
+            <p>All questions, including future updates. No restrictions.</p>
+          </div>
+          <div class="variant-card bike">
+            <h3>Theory A3 <span class="badge bike">Bicycle</span></h3>
+            <p>Tailored for the A3 electric bicycle license exam.</p>
+          </div>
+        </div>
+        <p style="margin-top:10px;">The full (Paid) version includes the complete official question bank, organized by category: traffic laws, road signs, vehicle knowledge, and more.</p>
+      </div>
+    </div>
+
+    <!-- Q4 EN -->
+    <div class="faq-item">
+      <button class="faq-question" dir="ltr" onclick="toggle(this)">
+        <span>What is the A3 Electric Bicycle exam?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer" dir="ltr">
+        <p>The <strong>A3</strong> version is for people required to take the theory exam for electric bicycles.</p>
+        <p style="margin-top: 8px;">In Israel, A3-category electric bicycles (up to 45 km/h) require a dedicated theory test. The app includes all relevant study material: laws, road signs, and road safety for cyclists.</p>
+      </div>
+    </div>
+
+    <!-- Q5 EN -->
+    <div class="faq-item">
+      <button class="faq-question" dir="ltr" onclick="toggle(this)">
+        <span>Why are there questions in multiple languages?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer" dir="ltr">
+        <p>The Israeli driving theory exam is offered in 7 official languages. The app includes all questions in every available language, so you can study in whichever language you're most comfortable with.</p>
+        <p style="margin-top: 8px;">You can filter questions by a specific language from the category menu.</p>
+      </div>
+    </div>
+
+    <!-- Q6 EN -->
+    <div class="faq-item">
+      <button class="faq-question" dir="ltr" onclick="toggle(this)">
+        <span>How do I contact support?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer" dir="ltr">
+        <div class="contact-card">
+          <p>For questions, suggestions, and technical issues:</p>
+          <div class="email"><a href="mailto:ybeapps@gmail.com">ybeapps@gmail.com</a></div>
+          <p>We aim to respond within 24–48 hours.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /data-lang=en -->
+
+</main>
+
+<footer>
+  <p>&copy; 2024 YBE Apps &nbsp;·&nbsp; <a href="mailto:ybeapps@gmail.com" style="color:var(--green);">ybeapps@gmail.com</a></p>
+</footer>
+
+<script>
+  function toggle(btn) {
+    const item = btn.closest('.faq-item');
+    item.classList.toggle('open');
+  }
+
+  function setLang(lang) {
+    document.body.classList.toggle('lang-en', lang === 'en');
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.lang-btn:' + (lang === 'en' ? 'last-child' : 'first-child')).classList.add('active');
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+  }
+
+  // Auto-detect from browser language
+  const browserLang = navigator.language || navigator.userLanguage;
+  if (browserLang && !browserLang.startsWith('he') && !browserLang.startsWith('ar')) {
+    setLang('en');
+  }
+</script>
+
+</body>
+</html>
