@@ -191,53 +191,18 @@
     }
     .faq-answer a:hover { text-decoration: underline; }
 
-    .badge {
-      display: inline-block;
-      background: var(--green);
-      color: white;
-      border-radius: 12px;
-      padding: 2px 10px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-inline-start: 6px;
-      vertical-align: middle;
-    }
-    .badge.free { background: #2196F3; }
-    .badge.paid { background: #FF9800; }
-    .badge.bike { background: #9C27B0; }
-
-    /* Variants section */
-    .variants-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
-      margin: 16px 0;
-    }
-    .variant-card {
-      border-radius: 10px;
-      padding: 16px;
-      text-align: center;
-    }
-    .variant-card.free { background: #E3F2FD; border: 1px solid #90CAF9; }
-    .variant-card.paid { background: #FFF3E0; border: 1px solid #FFCC80; }
-    .variant-card.bike { background: #F3E5F5; border: 1px solid #CE93D8; }
-    .variant-card h3 { font-size: 1rem; margin-bottom: 6px; }
-    .variant-card p { font-size: 0.88rem; color: var(--text-secondary); }
-
-    /* Languages */
-    .lang-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .lang-chip {
+    .highlight-box {
       background: var(--green-light);
-      color: var(--green-dark);
-      padding: 4px 14px;
-      border-radius: 16px;
-      font-size: 0.88rem;
-      font-weight: 500;
+      border-right: 4px solid var(--green);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 10px 0;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .highlight-box[dir="ltr"] {
+      border-right: none;
+      border-left: 4px solid var(--green);
     }
 
     /* Contact */
@@ -300,7 +265,63 @@
 
     <div class="section-title">שאלות נפוצות</div>
 
-    <!-- Q1: Reset progress -->
+    <!-- Q1: Free vs Paid -->
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span>מה ההבדל בין הגרסה החינמית לגרסה בתשלום?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="highlight-box">אין הבדל! שתי הגרסאות מכילות את כל השאלות. ההבדל היחיד הוא שבגרסה החינמית יש פרסומות, ובגרסה בתשלום אין.</div>
+        <p>שתי הגרסאות כוללות את מלוא מאגר השאלות הרשמי, עם כל הקטגוריות והעדכונים. הגרסה בתשלום מיועדת למי שרוצה חוויה נקייה ללא הפרעות.</p>
+      </div>
+    </div>
+
+    <!-- Q2: Study method -->
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span>מה שיטת הלמידה המומלצת?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>אנחנו ממליצים ללמוד בשלושה שלבים:</p>
+        <ol style="margin: 10px 0 0 20px; direction: rtl;">
+          <li><strong>תמרורים</strong> — התחל בלמידת שלטי התנועה (יש לכך מדור ייעודי באפליקציה)</li>
+          <li><strong>שאלות לפי נושא</strong> — תרגל שאלות נושא-נושא עד שמבינים את התיאוריה</li>
+          <li><strong>מבחני תרגול</strong> — כשמרגישים בשלים, עברו למבחני דמה בתנאי בחינה</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Q3: App advantages -->
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span>מה יתרונות האפליקציה?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <ul style="margin: 10px 0 0 20px; direction: rtl;">
+          <li><strong>עדכונים שוטפים</strong> — מנגנון מיוחד עוקב אחר שינויי משרד התחבורה ומעדכן את מאגר השאלות תוך שמירה על ההתקדמות שלך</li>
+          <li><strong>ללא הרשמה חובה</strong> — מתחילים ללמוד מיד</li>
+          <li><strong>פועל אופלליין</strong> — מסד הנתונים שמור במכשיר, ניתן ללמוד בכל מקום</li>
+          <li><strong>למידת תמרורים</strong> — מדור תמרורים ייעודי עם קישורים רלוונטיים להעמקה</li>
+          <li><strong>מעקב התקדמות</strong> — מסך הבית מציג את ההתקדמות שלך בכל נושא</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Q4: Why no textbook -->
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggle(this)">
+        <span>אפשר ללמוד לתיאוריה בלי ספר לימוד?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>כן. התיאוריה משתנה לעתים רחוקות, ומשרד התחבורה עצמו רואה בתרגול בנק השאלות הכנה מספקת לבחינה. האפליקציה כוללת הסברים לכל שאלה — ניתן להבין את העקרונות לעומק גם ללא ספר.</p>
+      </div>
+    </div>
+
+    <!-- Q5: Reset progress -->
     <div class="faq-item">
       <button class="faq-question" onclick="toggle(this)">
         <span>איך מאפסים התקדמות?</span>
@@ -314,81 +335,6 @@
           <li>לחץ על <strong>"אפס נתונים"</strong> / Reset Data</li>
         </ol>
         <p style="margin-top: 10px; color: #D32F2F;">⚠️ פעולה זו בלתי הפיכה — כל השאלות שנלמדו ימחקו.</p>
-      </div>
-    </div>
-
-    <!-- Q2: Change language -->
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        <span>איך משנים שפה?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">
-        <p>שינוי השפה נעשה דרך הגדרות המכשיר:</p>
-        <ol style="margin: 10px 0 0 20px; direction: rtl;">
-          <li>פתח <strong>הגדרות ← כללי ← שפה ואזור</strong></li>
-          <li>הוסף או שנה את שפת המכשיר</li>
-          <li>הפעל מחדש את האפליקציה</li>
-        </ol>
-        <p style="margin-top: 10px;">השאלות מוצגות בשפה שהגדרת. ניתן גם לבחור שפת שאלות ספציפית מתפריט הקטגוריות בתוך האפליקציה.</p>
-        <div class="lang-chips">
-          <span class="lang-chip">עברית</span>
-          <span class="lang-chip">ערבית</span>
-          <span class="lang-chip">English</span>
-          <span class="lang-chip">Русский</span>
-          <span class="lang-chip">Français</span>
-          <span class="lang-chip">Español</span>
-          <span class="lang-chip">አማርኛ</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Q3: Free vs Paid -->
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        <span>מה ההבדל בין Free ל-Paid?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">
-        <div class="variants-grid">
-          <div class="variant-card free">
-            <h3>תיאוריה Free <span class="badge free">Free</span></h3>
-            <p>גישה לחלק מהשאלות — מושלם להתחלה ולהתנסות.</p>
-          </div>
-          <div class="variant-card paid">
-            <h3>תיאוריה <span class="badge paid">Paid</span></h3>
-            <p>כל השאלות, כולל עדכונים עתידיים. ללא הגבלות.</p>
-          </div>
-          <div class="variant-card bike">
-            <h3>תיאוריה A3 <span class="badge bike">אופניים</span></h3>
-            <p>מותאם לבחינת רישיון אופניים חשמליים A3.</p>
-          </div>
-        </div>
-        <p>הגרסה המלאה (Paid) כוללת את כל מאגר השאלות הרשמי, מוקטגורות לפי: חוקי תנועה, תמרורים, ידע ברכב, ועוד.</p>
-      </div>
-    </div>
-
-    <!-- Q4: A3 bicycle -->
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        <span>מה זה אופניים חשמליים A3?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">
-        <p>גרסת <strong>A3</strong> מיועדת למי שנדרש לגשת לבחינת תיאוריה לאופניים חשמליים.</p>
-        <p style="margin-top: 8px;">בישראל, אופניים חשמליים ברמה A3 (מהירות עד 45 קמ"ש) מחייבים בחינת תיאוריה ייעודית. האפליקציה כוללת את כל חומר הלימוד הרלוונטי: חוקים, תמרורים, ובטיחות בדרכים לרוכבי אופניים.</p>
-      </div>
-    </div>
-
-    <!-- Q5: Multiple languages in questions -->
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        <span>למה יש שאלות בשפות שונות?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">
-        <p>בחינת התיאוריה בישראל מוצעת ב-7 שפות רשמיות. האפליקציה כוללת את כל השאלות בכל השפות הזמינות, כדי שתוכל להתאמן בשפה שנוחה לך ביותר.</p>
-        <p style="margin-top: 8px;">ניתן לסנן שאלות לפי שפה ספציפית מתוך תפריט הקטגוריות.</p>
       </div>
     </div>
 
@@ -415,7 +361,63 @@
 
     <div class="section-title" style="text-align:left;">Frequently Asked Questions</div>
 
-    <!-- Q1 EN -->
+    <!-- Q1 EN: Free vs Paid -->
+    <div class="faq-item">
+      <button class="faq-question" dir="ltr" onclick="toggle(this)">
+        <span>What's the difference between the free and paid version?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer" dir="ltr">
+        <div class="highlight-box" dir="ltr">There's no difference! Both versions contain all the questions. The only difference is that the free version has ads, and the paid version doesn't.</div>
+        <p>Both versions include the complete official question bank with all categories and future updates. The paid version is for those who want a clean, uninterrupted experience.</p>
+      </div>
+    </div>
+
+    <!-- Q2 EN: Study method -->
+    <div class="faq-item">
+      <button class="faq-question" dir="ltr" onclick="toggle(this)">
+        <span>What is the recommended study method?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer" dir="ltr">
+        <p>We recommend studying in three stages:</p>
+        <ol style="margin: 10px 0 0 20px;">
+          <li><strong>Traffic Signs</strong> — Start by learning road signs (there's a dedicated section in the app)</li>
+          <li><strong>Questions by Topic</strong> — Practice topic by topic until you understand the theory</li>
+          <li><strong>Practice Exams</strong> — Once you feel ready, take timed mock exams</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Q3 EN: App advantages -->
+    <div class="faq-item">
+      <button class="faq-question" dir="ltr" onclick="toggle(this)">
+        <span>What are the app's advantages?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer" dir="ltr">
+        <ul style="margin: 10px 0 0 20px;">
+          <li><strong>Ongoing updates</strong> — A dedicated mechanism tracks Ministry of Transport changes and updates the question bank while preserving your progress</li>
+          <li><strong>No registration required</strong> — Start studying immediately</li>
+          <li><strong>Works offline</strong> — The database is stored on-device, study anywhere</li>
+          <li><strong>Traffic sign learning</strong> — A dedicated signs section with relevant links for deeper understanding</li>
+          <li><strong>Progress tracking</strong> — The home screen shows your progress across every topic</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Q4 EN: Why no textbook -->
+    <div class="faq-item">
+      <button class="faq-question" dir="ltr" onclick="toggle(this)">
+        <span>Can I study for the theory exam without a textbook?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer" dir="ltr">
+        <p>Yes. Theory rarely changes, and the Ministry of Transport itself considers practicing the question bank sufficient preparation for the exam. The app includes explanations for every question — you can understand the principles in depth without a textbook.</p>
+      </div>
+    </div>
+
+    <!-- Q5 EN: Reset progress -->
     <div class="faq-item">
       <button class="faq-question" dir="ltr" onclick="toggle(this)">
         <span>How do I reset my progress?</span>
@@ -432,82 +434,7 @@
       </div>
     </div>
 
-    <!-- Q2 EN -->
-    <div class="faq-item">
-      <button class="faq-question" dir="ltr" onclick="toggle(this)">
-        <span>How do I change the language?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer" dir="ltr">
-        <p>Language is controlled by your device settings:</p>
-        <ol style="margin: 10px 0 0 20px;">
-          <li>Open <strong>Settings → General → Language &amp; Region</strong></li>
-          <li>Add or change your preferred language</li>
-          <li>Restart the app</li>
-        </ol>
-        <p style="margin-top: 10px;">You can also filter questions by a specific language from the category menu inside the app.</p>
-        <div class="lang-chips" style="justify-content:flex-start;">
-          <span class="lang-chip">עברית</span>
-          <span class="lang-chip">ערבית</span>
-          <span class="lang-chip">English</span>
-          <span class="lang-chip">Русский</span>
-          <span class="lang-chip">Français</span>
-          <span class="lang-chip">Español</span>
-          <span class="lang-chip">አማርኛ</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Q3 EN -->
-    <div class="faq-item">
-      <button class="faq-question" dir="ltr" onclick="toggle(this)">
-        <span>What's the difference between Free and Paid?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer" dir="ltr">
-        <div class="variants-grid">
-          <div class="variant-card free">
-            <h3>Theory Free <span class="badge free">Free</span></h3>
-            <p>Access to a subset of questions — great for trying the app.</p>
-          </div>
-          <div class="variant-card paid">
-            <h3>Theory <span class="badge paid">Paid</span></h3>
-            <p>All questions, including future updates. No restrictions.</p>
-          </div>
-          <div class="variant-card bike">
-            <h3>Theory A3 <span class="badge bike">Bicycle</span></h3>
-            <p>Tailored for the A3 electric bicycle license exam.</p>
-          </div>
-        </div>
-        <p style="margin-top:10px;">The full (Paid) version includes the complete official question bank, organized by category: traffic laws, road signs, vehicle knowledge, and more.</p>
-      </div>
-    </div>
-
-    <!-- Q4 EN -->
-    <div class="faq-item">
-      <button class="faq-question" dir="ltr" onclick="toggle(this)">
-        <span>What is the A3 Electric Bicycle exam?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer" dir="ltr">
-        <p>The <strong>A3</strong> version is for people required to take the theory exam for electric bicycles.</p>
-        <p style="margin-top: 8px;">In Israel, A3-category electric bicycles (up to 45 km/h) require a dedicated theory test. The app includes all relevant study material: laws, road signs, and road safety for cyclists.</p>
-      </div>
-    </div>
-
-    <!-- Q5 EN -->
-    <div class="faq-item">
-      <button class="faq-question" dir="ltr" onclick="toggle(this)">
-        <span>Why are there questions in multiple languages?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer" dir="ltr">
-        <p>The Israeli driving theory exam is offered in 7 official languages. The app includes all questions in every available language, so you can study in whichever language you're most comfortable with.</p>
-        <p style="margin-top: 8px;">You can filter questions by a specific language from the category menu.</p>
-      </div>
-    </div>
-
-    <!-- Q6 EN -->
+    <!-- Q6 EN: Contact -->
     <div class="faq-item">
       <button class="faq-question" dir="ltr" onclick="toggle(this)">
         <span>How do I contact support?</span>
