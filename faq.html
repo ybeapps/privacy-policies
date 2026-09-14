@@ -5,17 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="שאלות נפוצות - תיאוריה לרישיון נהיגה | Theory Driving Exam App FAQ">
   <title>תיאוריה - שאלות נפוצות | Theory App FAQ</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
   <style>
     :root {
-      --green: #4CAF50;
-      --green-dark: #388E3C;
+      --green: #2E7D32;
+      --green-mid: #388E3C;
+      --green-bright: #4CAF50;
       --green-light: #E8F5E9;
-      --text: #212121;
-      --text-secondary: #757575;
+      --green-xlight: #F1F8F1;
+      --text: #1a1a1a;
+      --text-secondary: #555;
       --border: #E0E0E0;
-      --bg: #FAFAFA;
+      --bg: #F7F9F7;
       --card-bg: #FFFFFF;
-      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+      --shadow: 0 2px 12px rgba(0,0,0,0.07);
+      --shadow-hover: 0 6px 24px rgba(0,0,0,0.13);
+      --radius: 14px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,75 +30,97 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.7;
-      min-height: 100vh;
     }
 
-    /* Header */
-    header {
-      background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
-      color: white;
-      padding: 40px 20px 50px;
-      text-align: center;
+    /* ─── HERO ─────────────────────────────── */
+    .hero {
       position: relative;
-      overflow: hidden;
-    }
-    header::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .app-icon {
-      width: 80px;
-      height: 80px;
-      background: white;
-      border-radius: 18px;
-      margin: 0 auto 16px;
+      min-height: 340px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 40px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      overflow: hidden;
+      text-align: center;
     }
-    header h1 {
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 60%;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(27,94,32,0.88) 0%, rgba(46,125,50,0.82) 60%, rgba(0,0,0,0.5) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      padding: 48px 24px 52px;
+      max-width: 640px;
+    }
+    .app-icon {
+      width: 88px;
+      height: 88px;
+      background: white;
+      border-radius: 22px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+    }
+    .app-icon img {
+      width: 88px;
+      height: 88px;
+      border-radius: 22px;
+      object-fit: cover;
+    }
+    .hero-content h1 {
       font-size: 2rem;
       font-weight: 700;
-      margin-bottom: 6px;
       letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
-    header .subtitle {
-      font-size: 1.05rem;
-      opacity: 0.9;
-      margin-bottom: 20px;
+    .hero-content .subtitle {
+      font-size: 1rem;
+      opacity: 0.88;
+      margin-bottom: 24px;
     }
     .appstore-btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: white;
-      color: var(--green-dark);
+      color: var(--green);
       text-decoration: none;
-      padding: 10px 24px;
-      border-radius: 25px;
-      font-weight: 600;
+      padding: 11px 26px;
+      border-radius: 30px;
+      font-weight: 700;
       font-size: 0.95rem;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.2);
       transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
-    .appstore-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+    .appstore-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+    .appstore-btn i { font-size: 1.1rem; }
 
-    /* Lang toggle */
+    /* ─── LANG BAR ──────────────────────────── */
     .lang-bar {
       background: white;
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: center;
-      gap: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
     .lang-btn {
-      padding: 10px 28px;
+      padding: 12px 32px;
       border: none;
       background: none;
       cursor: pointer;
@@ -102,39 +129,50 @@
       color: var(--text-secondary);
       border-bottom: 3px solid transparent;
       transition: color 0.15s, border-color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .lang-btn.active { color: var(--green); border-bottom-color: var(--green); }
-    .lang-btn:hover { color: var(--green); }
+    .lang-btn.active { color: var(--green-mid); border-bottom-color: var(--green-mid); }
+    .lang-btn:hover { color: var(--green-mid); }
 
-    /* Main */
+    /* ─── MAIN ──────────────────────────────── */
     main {
-      max-width: 780px;
+      max-width: 800px;
       margin: 0 auto;
-      padding: 32px 16px 60px;
+      padding: 36px 16px 72px;
     }
 
-    .section-title {
-      font-size: 1.1rem;
+    .section-label {
+      font-size: 0.78rem;
       font-weight: 700;
-      color: var(--text-secondary);
+      color: var(--green-mid);
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin: 32px 0 16px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid var(--green-light);
+      letter-spacing: 1.5px;
+      margin: 40px 0 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
     }
 
-    /* FAQ Cards */
+    /* ─── FAQ ITEMS ─────────────────────────── */
     .faq-item {
       background: var(--card-bg);
-      border-radius: 12px;
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
-      margin-bottom: 12px;
-      overflow: hidden;
+      margin-bottom: 10px;
       border: 1px solid var(--border);
-      transition: box-shadow 0.15s;
+      transition: box-shadow 0.15s, border-color 0.15s;
+      overflow: hidden;
     }
-    .faq-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .faq-item:hover { box-shadow: var(--shadow-hover); border-color: #C8E6C9; }
+    .faq-item.open { border-color: #A5D6A7; }
 
     .faq-question {
       width: 100%;
@@ -142,317 +180,528 @@
       background: none;
       border: none;
       padding: 18px 20px;
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--text);
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      gap: 14px;
     }
-    .faq-question[dir="ltr"] { text-align: left; flex-direction: row-reverse; }
+    .faq-question[dir="ltr"] { text-align: left; }
 
-    .faq-icon {
+    .faq-q-icon {
       flex-shrink: 0;
-      width: 28px;
-      height: 28px;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      transition: transform 0.2s;
+    }
+    .faq-question:hover .faq-q-icon { transform: scale(1.08); }
+
+    .faq-q-text { flex: 1; }
+
+    .faq-chevron {
+      flex-shrink: 0;
+      color: #aaa;
+      font-size: 0.8rem;
+      transition: transform 0.25s;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--green-mid); }
+
+    .faq-answer {
+      display: none;
+      padding: 4px 20px 20px 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.85;
+      border-top: 1px solid var(--green-xlight);
+    }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-answer[dir="ltr"] { text-align: left; }
+    .faq-answer a { color: var(--green-mid); font-weight: 600; text-decoration: none; }
+    .faq-answer a:hover { text-decoration: underline; }
+
+    /* ─── HIGHLIGHT ─────────────────────────── */
+    .highlight-box {
+      background: var(--green-xlight);
+      border-inline-start: 4px solid var(--green-bright);
+      border-radius: 8px;
+      padding: 13px 16px;
+      margin: 12px 0;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.97rem;
+    }
+
+    /* ─── STEP CARDS ────────────────────────── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 14px 0 6px;
+    }
+    .step-card {
+      background: var(--green-xlight);
+      border-radius: 12px;
+      padding: 18px 14px;
+      text-align: center;
+      border: 1px solid #C8E6C9;
+    }
+    .step-num {
+      width: 34px;
+      height: 34px;
+      background: var(--green-mid);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      margin: 0 auto 10px;
+    }
+    .step-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .step-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+
+    /* ─── FEATURES GRID ─────────────────────── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 14px 0 6px;
+    }
+    .feature-card {
+      background: var(--green-xlight);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border: 1px solid #C8E6C9;
+    }
+    .feature-card .ficon {
+      flex-shrink: 0;
+      width: 34px;
+      height: 34px;
+      background: var(--green-mid);
+      color: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.88rem;
+      margin-top: 1px;
+    }
+    .feature-card h4 { font-size: 0.87rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .feature-card p { font-size: 0.81rem; color: var(--text-secondary); line-height: 1.5; }
+
+    /* ─── CONTACT ───────────────────────────── */
+    .contact-card {
+      background: white;
+      border: 1px solid #C8E6C9;
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-align: center;
+      margin-top: 14px;
+      box-shadow: var(--shadow);
+    }
+    .contact-card .contact-icon {
+      width: 56px;
+      height: 56px;
       background: var(--green-light);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--green);
-      font-size: 1.1rem;
-      font-weight: 700;
-      transition: transform 0.2s, background 0.2s;
+      margin: 0 auto 14px;
+      font-size: 1.4rem;
+      color: var(--green-mid);
     }
-    .faq-item.open .faq-icon {
-      transform: rotate(45deg);
-      background: var(--green);
-      color: white;
-    }
-
-    .faq-answer {
-      display: none;
-      padding: 0 20px 18px;
-      color: var(--text-secondary);
-      font-size: 0.97rem;
-      line-height: 1.8;
-      border-top: 1px solid var(--green-light);
-    }
-    .faq-item.open .faq-answer { display: block; }
-    .faq-answer[dir="ltr"] { text-align: left; }
-
-    .faq-answer a {
-      color: var(--green);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .faq-answer a:hover { text-decoration: underline; }
-
-    .highlight-box {
-      background: var(--green-light);
-      border-right: 4px solid var(--green);
-      border-radius: 8px;
-      padding: 14px 16px;
-      margin: 10px 0;
-      color: var(--text);
-      font-weight: 600;
-    }
-    .highlight-box[dir="ltr"] {
-      border-right: none;
-      border-left: 4px solid var(--green);
-    }
-
-    /* Contact */
-    .contact-card {
-      background: var(--green-light);
-      border: 1px solid #A5D6A7;
-      border-radius: 12px;
-      padding: 24px;
-      text-align: center;
-      margin-top: 16px;
-    }
+    .contact-card p { color: var(--text-secondary); font-size: 0.95rem; }
     .contact-card .email {
-      font-size: 1.1rem;
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 1.05rem;
       font-weight: 700;
-      color: var(--green-dark);
+      color: var(--green-mid);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.15s;
     }
-    .contact-card p { color: var(--text-secondary); margin-top: 8px; font-size: 0.95rem; }
+    .contact-card .email:hover { border-bottom-color: var(--green-mid); }
+    .contact-card .response-time {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: #999;
+    }
 
-    /* Footer */
+    /* ─── FOOTER ────────────────────────────── */
     footer {
       text-align: center;
       padding: 24px;
-      color: var(--text-secondary);
-      font-size: 0.85rem;
+      color: #aaa;
+      font-size: 0.82rem;
       border-top: 1px solid var(--border);
     }
+    footer a { color: var(--green-mid); text-decoration: none; }
 
-    /* Hidden by lang */
+    /* ─── LANG SWITCHING ────────────────────── */
     [data-lang="en"] { display: none; }
     body.lang-en [data-lang="he"] { display: none; }
     body.lang-en [data-lang="en"] { display: block; }
     body.lang-en { direction: ltr; }
     body.lang-en main { direction: ltr; }
 
-    @media (max-width: 480px) {
-      header h1 { font-size: 1.5rem; }
-      .faq-question { font-size: 0.97rem; }
-      main { padding: 20px 12px 40px; }
+    /* ─── RESPONSIVE ────────────────────────── */
+    @media (max-width: 560px) {
+      .hero-content h1 { font-size: 1.5rem; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      main { padding: 24px 12px 56px; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="app-icon">🚗</div>
-  <h1>תיאוריה — שאלות נפוצות</h1>
-  <p class="subtitle">אפליקציית הכנה לבחינת תיאוריה לרישיון נהיגה</p>
-  <a class="appstore-btn" href="https://apps.apple.com/il/app/theory-driving-exam/id586093528" target="_blank">⬇ הורד באפ סטור</a>
-</header>
+<!-- ══════════ HERO ══════════ -->
+<div class="hero">
+  <img class="hero-img"
+       src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1400&q=80"
+       alt="נהיגה בדרך"
+       loading="eager">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="app-icon">
+      <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/3a/5b/9d/3a5b9d00-7f5e-4b1d-9e8c-1a2b3c4d5e6f/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/460x0w.webp"
+           alt="תיאוריה App"
+           onerror="this.parentElement.innerHTML='<i class=\'fa-solid fa-car-side\' style=\'font-size:42px;color:var(--green-mid)\'></i>'"
+           loading="eager">
+    </div>
+    <h1>תיאוריה — שאלות נפוצות</h1>
+    <p class="subtitle">אפליקציית הכנה לבחינת תיאוריה לרישיון נהיגה</p>
+    <a class="appstore-btn" href="https://apps.apple.com/il/app/theory-driving-exam/id586093528" target="_blank">
+      <i class="fa-brands fa-apple"></i> הורד באפ סטור
+    </a>
+  </div>
+</div>
 
+<!-- ══════════ LANG BAR ══════════ -->
 <div class="lang-bar">
-  <button class="lang-btn active" onclick="setLang('he')">עברית</button>
-  <button class="lang-btn" onclick="setLang('en')">English</button>
+  <button class="lang-btn active" onclick="setLang('he')">
+    <i class="fa-solid fa-globe"></i> עברית
+  </button>
+  <button class="lang-btn" onclick="setLang('en')">
+    <i class="fa-solid fa-globe"></i> English
+  </button>
 </div>
 
 <main>
 
-  <!-- ══════════ HEBREW CONTENT ══════════ -->
+  <!-- ══════════ HEBREW ══════════ -->
   <div data-lang="he">
 
-    <div class="section-title">שאלות נפוצות</div>
+    <div class="section-label">שאלות נפוצות</div>
 
     <!-- Q1: Free vs Paid -->
     <div class="faq-item">
       <button class="faq-question" onclick="toggle(this)">
-        <span>מה ההבדל בין הגרסה החינמית לגרסה בתשלום?</span>
-        <span class="faq-icon">+</span>
+        <span class="faq-q-icon" style="background:#E8F5E9;color:#2E7D32;"><i class="fa-solid fa-tags"></i></span>
+        <span class="faq-q-text">מה ההבדל בין הגרסה החינמית לגרסה בתשלום?</span>
+        <i class="fa-solid fa-chevron-down faq-chevron"></i>
       </button>
       <div class="faq-answer">
-        <div class="highlight-box">שתי הגרסאות כוללות את כל השאלות — בלי הגבלה. ההבדל היחיד: בגרסה החינמית יש פרסומות, בגרסה בתשלום אין.</div>
-        <p style="margin-top:10px;">לא צריך לשדרג כדי לגשת לחומר. הגרסה בתשלום מיועדת פשוט למי שמעדיף חוויית לימוד נקייה.</p>
+        <div class="highlight-box">
+          <i class="fa-solid fa-circle-check" style="color:var(--green-bright);margin-inline-end:6px;"></i>
+          שתי הגרסאות כוללות את כל השאלות — בלי הגבלה. ההבדל היחיד: בגרסה החינמית יש פרסומות, בגרסה בתשלום אין.
+        </div>
+        <p>לא צריך לשדרג כדי לגשת לחומר. הגרסה בתשלום מיועדת למי שמעדיף חוויית לימוד נקייה.</p>
       </div>
     </div>
 
     <!-- Q2: Study method -->
     <div class="faq-item">
       <button class="faq-question" onclick="toggle(this)">
-        <span>איך כדאי ללמוד?</span>
-        <span class="faq-icon">+</span>
+        <span class="faq-q-icon" style="background:#E3F2FD;color:#1565C0;"><i class="fa-solid fa-route"></i></span>
+        <span class="faq-q-text">איך כדאי ללמוד?</span>
+        <i class="fa-solid fa-chevron-down faq-chevron"></i>
       </button>
       <div class="faq-answer">
         <p>שלושה שלבים שעובדים:</p>
-        <ol style="margin: 12px 0 0 20px; direction: rtl; line-height: 2;">
-          <li><strong>תמרורים קודם כל</strong> — הכר את שלטי הדרכים לפני שמתחילים בשאלות</li>
-          <li><strong>שאלות לפי נושא</strong> — עבור נושא אחרי נושא עד שהתיאוריה ברורה</li>
-          <li><strong>מבחני דמה</strong> — כשנרגיש מוכן, עברו לסימולציות בחינה</li>
-        </ol>
+        <div class="steps-grid" style="margin-top:14px;">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <h4>תמרורים</h4>
+            <p>התחל בשלטי הדרכים — הבסיס לכל השאר</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <h4>שאלות לפי נושא</h4>
+            <p>עבור נושא אחר נושא עד שהתיאוריה ברורה</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <h4>מבחני דמה</h4>
+            <p>סימולציות בחינה עד שמרגישים בשלים</p>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Q3: App advantages -->
     <div class="faq-item">
       <button class="faq-question" onclick="toggle(this)">
-        <span>מה מייחד את האפליקציה?</span>
-        <span class="faq-icon">+</span>
+        <span class="faq-q-icon" style="background:#FFF8E1;color:#F57F17;"><i class="fa-solid fa-star"></i></span>
+        <span class="faq-q-text">מה מייחד את האפליקציה?</span>
+        <i class="fa-solid fa-chevron-down faq-chevron"></i>
       </button>
       <div class="faq-answer">
-        <ul style="margin: 10px 0 0 20px; direction: rtl; line-height: 2.1;">
-          <li><strong>תמיד מעודכן</strong> — האפליקציה עוקבת אחר שינויי משרד התחבורה ומעדכנת את מאגר השאלות, בלי לאפס את ההתקדמות שלך</li>
-          <li><strong>בלי הרשמה</strong> — פותחים ומתחילים</li>
-          <li><strong>עובד גם בלי אינטרנט</strong> — כל המאגר שמור במכשיר</li>
-          <li><strong>מדור תמרורים</strong> — למידת שלטי תנועה עם הסברים והפניות רלוונטיות</li>
-          <li><strong>מעקב התקדמות</strong> — רואים בדיוק איפה עומדים בכל נושא</li>
-        </ul>
+        <div class="features-grid" style="margin-top:12px;">
+          <div class="feature-card">
+            <div class="ficon"><i class="fa-solid fa-arrows-rotate"></i></div>
+            <div>
+              <h4>תמיד מעודכן</h4>
+              <p>עוקב אחר שינויי משרד התחבורה — בלי לאפס את ההתקדמות שלך</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="ficon"><i class="fa-solid fa-wifi-slash"></i></div>
+            <div>
+              <h4>עובד אופלליין</h4>
+              <p>כל המאגר שמור במכשיר — ללמוד בכל מקום</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="ficon"><i class="fa-solid fa-user-slash"></i></div>
+            <div>
+              <h4>בלי הרשמה</h4>
+              <p>פותחים ומתחילים — אין צורך בחשבון</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="ficon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div>
+              <h4>מדור תמרורים</h4>
+              <p>למידת שלטי תנועה עם הסברים והפניות רלוונטיות</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="ficon"><i class="fa-solid fa-chart-line"></i></div>
+            <div>
+              <h4>מעקב התקדמות</h4>
+              <p>רואים בדיוק איפה עומדים בכל נושא</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Q4: Why no textbook -->
+    <!-- Q4: Textbook -->
     <div class="faq-item">
       <button class="faq-question" onclick="toggle(this)">
-        <span>צריך גם ספר לימוד?</span>
-        <span class="faq-icon">+</span>
+        <span class="faq-q-icon" style="background:#F3E5F5;color:#6A1B9A;"><i class="fa-solid fa-book-open"></i></span>
+        <span class="faq-q-text">צריך גם ספר לימוד?</span>
+        <i class="fa-solid fa-chevron-down faq-chevron"></i>
       </button>
       <div class="faq-answer">
         <p>לא. חומר הבחינה כמעט ולא משתנה, ומשרד התחבורה עצמו מתייחס לבנק השאלות כהכנה מספקת. לכל שאלה יש הסבר — אפשר להבין לעומק גם בלי ספר.</p>
       </div>
     </div>
 
-    <!-- Q5: Reset progress -->
+    <!-- Q5: Reset -->
     <div class="faq-item">
       <button class="faq-question" onclick="toggle(this)">
-        <span>איך מאפסים התקדמות?</span>
-        <span class="faq-icon">+</span>
+        <span class="faq-q-icon" style="background:#FCE4EC;color:#C62828;"><i class="fa-solid fa-rotate-left"></i></span>
+        <span class="faq-q-text">איך מאפסים התקדמות?</span>
+        <i class="fa-solid fa-chevron-down faq-chevron"></i>
       </button>
       <div class="faq-answer">
-        <ol style="margin: 10px 0 0 20px; direction: rtl; line-height: 2;">
+        <ol style="margin: 10px 0 0 20px; direction: rtl; line-height: 2.1;">
           <li>פתח <strong>הגדרות</strong> במכשיר</li>
           <li>גלול ל<strong>תיאוריה</strong></li>
           <li>הקש <strong>אפס נתונים</strong></li>
         </ol>
-        <p style="margin-top: 12px; color: #D32F2F; font-size:0.92rem;">⚠️ הפעולה בלתי הפיכה — כל ההתקדמות תימחק.</p>
+        <p style="margin-top:12px;color:#C62828;font-size:0.88rem;"><i class="fa-solid fa-triangle-exclamation"></i> הפעולה בלתי הפיכה — כל ההתקדמות תימחק.</p>
       </div>
     </div>
 
     <!-- Q6: Contact -->
     <div class="faq-item">
       <button class="faq-question" onclick="toggle(this)">
-        <span>יש שאלה? יצירת קשר</span>
-        <span class="faq-icon">+</span>
+        <span class="faq-q-icon" style="background:#E0F7FA;color:#00695C;"><i class="fa-solid fa-envelope"></i></span>
+        <span class="faq-q-text">יש שאלה? יצירת קשר</span>
+        <i class="fa-solid fa-chevron-down faq-chevron"></i>
       </button>
       <div class="faq-answer">
         <div class="contact-card">
+          <div class="contact-icon"><i class="fa-solid fa-headset"></i></div>
           <p>שאלות, הצעות, או בעיה טכנית — אנחנו כאן:</p>
-          <div class="email" style="margin-top:10px;"><a href="mailto:ybeapps@gmail.com">ybeapps@gmail.com</a></div>
-          <p style="margin-top:8px;">זמן תגובה ממוצע: 24–48 שעות.</p>
+          <a class="email" href="mailto:ybeapps@gmail.com">ybeapps@gmail.com</a>
+          <p class="response-time"><i class="fa-regular fa-clock"></i> זמן תגובה ממוצע: 24–48 שעות</p>
         </div>
       </div>
     </div>
 
-  </div><!-- /data-lang=he -->
+  </div><!-- /he -->
 
 
-  <!-- ══════════ ENGLISH CONTENT ══════════ -->
+  <!-- ══════════ ENGLISH ══════════ -->
   <div data-lang="en" dir="ltr">
 
-    <div class="section-title" style="text-align:left;">Frequently Asked Questions</div>
+    <div class="section-label" style="text-align:left;">Frequently Asked Questions</div>
 
-    <!-- Q1 EN: Free vs Paid -->
+    <!-- Q1 EN -->
     <div class="faq-item">
       <button class="faq-question" dir="ltr" onclick="toggle(this)">
-        <span>What's the difference between the free and paid version?</span>
-        <span class="faq-icon">+</span>
+        <i class="fa-solid fa-chevron-down faq-chevron" style="order:-1;"></i>
+        <span class="faq-q-text">What's the difference between the free and paid version?</span>
+        <span class="faq-q-icon" style="background:#E8F5E9;color:#2E7D32;"><i class="fa-solid fa-tags"></i></span>
       </button>
       <div class="faq-answer" dir="ltr">
-        <div class="highlight-box" dir="ltr">Both versions include every question — no limits. The only difference: the free version has ads, the paid version doesn't.</div>
-        <p style="margin-top:10px;">You don't need to upgrade to access the full content. The paid version is simply for those who prefer an uninterrupted study experience.</p>
+        <div class="highlight-box" style="border-inline-start:4px solid var(--green-bright);">
+          <i class="fa-solid fa-circle-check" style="color:var(--green-bright);margin-right:6px;"></i>
+          Both versions include every question — no limits. The only difference: the free version has ads, the paid version doesn't.
+        </div>
+        <p style="margin-top:10px;">You don't need to upgrade to access the full content. The paid version is simply for those who prefer an uninterrupted experience.</p>
       </div>
     </div>
 
-    <!-- Q2 EN: Study method -->
+    <!-- Q2 EN -->
     <div class="faq-item">
       <button class="faq-question" dir="ltr" onclick="toggle(this)">
-        <span>What's the best way to study?</span>
-        <span class="faq-icon">+</span>
+        <i class="fa-solid fa-chevron-down faq-chevron" style="order:-1;"></i>
+        <span class="faq-q-text">What's the best way to study?</span>
+        <span class="faq-q-icon" style="background:#E3F2FD;color:#1565C0;"><i class="fa-solid fa-route"></i></span>
       </button>
       <div class="faq-answer" dir="ltr">
         <p>Three steps that work:</p>
-        <ol style="margin: 12px 0 0 20px; line-height: 2;">
-          <li><strong>Signs first</strong> — Get familiar with road signs before diving into questions</li>
-          <li><strong>Questions by topic</strong> — Work through one topic at a time until the theory clicks</li>
-          <li><strong>Mock exams</strong> — Once you feel ready, run timed practice tests</li>
-        </ol>
+        <div class="steps-grid" style="margin-top:14px;">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <h4>Traffic Signs</h4>
+            <p>Start with road signs — the foundation of everything else</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <h4>Questions by Topic</h4>
+            <p>Work through one topic at a time until it clicks</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <h4>Mock Exams</h4>
+            <p>Run timed practice tests until you feel ready</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Q3 EN: App advantages -->
+    <!-- Q3 EN -->
     <div class="faq-item">
       <button class="faq-question" dir="ltr" onclick="toggle(this)">
-        <span>What makes this app different?</span>
-        <span class="faq-icon">+</span>
+        <i class="fa-solid fa-chevron-down faq-chevron" style="order:-1;"></i>
+        <span class="faq-q-text">What makes this app different?</span>
+        <span class="faq-q-icon" style="background:#FFF8E1;color:#F57F17;"><i class="fa-solid fa-star"></i></span>
       </button>
       <div class="faq-answer" dir="ltr">
-        <ul style="margin: 10px 0 0 20px; line-height: 2.1;">
-          <li><strong>Always up to date</strong> — The app tracks Ministry of Transport changes and updates the question bank without resetting your progress</li>
-          <li><strong>No sign-up needed</strong> — Open the app and start</li>
-          <li><strong>Works offline</strong> — The full database lives on your device</li>
-          <li><strong>Signs section</strong> — Learn traffic signs with explanations and relevant references</li>
-          <li><strong>Progress tracking</strong> — See exactly where you stand in every topic</li>
-        </ul>
+        <div class="features-grid" style="margin-top:12px;">
+          <div class="feature-card">
+            <div class="ficon"><i class="fa-solid fa-arrows-rotate"></i></div>
+            <div>
+              <h4>Always up to date</h4>
+              <p>Tracks Ministry of Transport changes without resetting your progress</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="ficon"><i class="fa-solid fa-wifi-slash"></i></div>
+            <div>
+              <h4>Works offline</h4>
+              <p>The full database lives on your device — study anywhere</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="ficon"><i class="fa-solid fa-user-slash"></i></div>
+            <div>
+              <h4>No sign-up needed</h4>
+              <p>Open and start — no account required</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="ficon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div>
+              <h4>Signs section</h4>
+              <p>Learn traffic signs with explanations and relevant references</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="ficon"><i class="fa-solid fa-chart-line"></i></div>
+            <div>
+              <h4>Progress tracking</h4>
+              <p>See exactly where you stand in every topic</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Q4 EN: Why no textbook -->
+    <!-- Q4 EN -->
     <div class="faq-item">
       <button class="faq-question" dir="ltr" onclick="toggle(this)">
-        <span>Do I also need a textbook?</span>
-        <span class="faq-icon">+</span>
+        <i class="fa-solid fa-chevron-down faq-chevron" style="order:-1;"></i>
+        <span class="faq-q-text">Do I also need a textbook?</span>
+        <span class="faq-q-icon" style="background:#F3E5F5;color:#6A1B9A;"><i class="fa-solid fa-book-open"></i></span>
       </button>
       <div class="faq-answer" dir="ltr">
-        <p>No. The exam material rarely changes, and the Ministry of Transport itself treats the question bank as sufficient preparation. Every question comes with an explanation, so you can build a real understanding without a textbook.</p>
+        <p>No. The exam material rarely changes, and the Ministry of Transport itself treats the question bank as sufficient preparation. Every question comes with an explanation — you can build real understanding without a textbook.</p>
       </div>
     </div>
 
-    <!-- Q5 EN: Reset progress -->
+    <!-- Q5 EN -->
     <div class="faq-item">
       <button class="faq-question" dir="ltr" onclick="toggle(this)">
-        <span>How do I reset my progress?</span>
-        <span class="faq-icon">+</span>
+        <i class="fa-solid fa-chevron-down faq-chevron" style="order:-1;"></i>
+        <span class="faq-q-text">How do I reset my progress?</span>
+        <span class="faq-q-icon" style="background:#FCE4EC;color:#C62828;"><i class="fa-solid fa-rotate-left"></i></span>
       </button>
       <div class="faq-answer" dir="ltr">
-        <ol style="margin: 10px 0 0 20px; line-height: 2;">
+        <ol style="margin: 10px 0 0 20px; line-height: 2.1;">
           <li>Open <strong>Settings</strong> on your device</li>
           <li>Scroll down to <strong>Theory</strong></li>
           <li>Tap <strong>Reset Data</strong></li>
         </ol>
-        <p style="margin-top: 12px; color: #D32F2F; font-size:0.92rem;">⚠️ This can't be undone — all progress will be erased.</p>
+        <p style="margin-top:12px;color:#C62828;font-size:0.88rem;"><i class="fa-solid fa-triangle-exclamation"></i> This can't be undone — all progress will be erased.</p>
       </div>
     </div>
 
-    <!-- Q6 EN: Contact -->
+    <!-- Q6 EN -->
     <div class="faq-item">
       <button class="faq-question" dir="ltr" onclick="toggle(this)">
-        <span>Got a question? Get in touch</span>
-        <span class="faq-icon">+</span>
+        <i class="fa-solid fa-chevron-down faq-chevron" style="order:-1;"></i>
+        <span class="faq-q-text">Got a question? Get in touch</span>
+        <span class="faq-q-icon" style="background:#E0F7FA;color:#00695C;"><i class="fa-solid fa-envelope"></i></span>
       </button>
       <div class="faq-answer" dir="ltr">
         <div class="contact-card">
+          <div class="contact-icon"><i class="fa-solid fa-headset"></i></div>
           <p>Questions, suggestions, or a technical issue — we're here:</p>
-          <div class="email" style="margin-top:10px;"><a href="mailto:ybeapps@gmail.com">ybeapps@gmail.com</a></div>
-          <p style="margin-top:8px;">Average response time: 24–48 hours.</p>
+          <a class="email" href="mailto:ybeapps@gmail.com">ybeapps@gmail.com</a>
+          <p class="response-time"><i class="fa-regular fa-clock"></i> Average response time: 24–48 hours</p>
         </div>
       </div>
     </div>
 
-  </div><!-- /data-lang=en -->
+  </div><!-- /en -->
 
 </main>
 
 <footer>
-  <p>&copy; 2024 YBE Apps &nbsp;·&nbsp; <a href="mailto:ybeapps@gmail.com" style="color:var(--green);">ybeapps@gmail.com</a></p>
+  <p>&copy; 2024 YBE Apps &nbsp;·&nbsp; <a href="mailto:ybeapps@gmail.com">ybeapps@gmail.com</a></p>
+  <p style="margin-top:4px;font-size:0.75rem;">
+    Photo: <a href="https://unsplash.com/@markuswinkler" target="_blank" rel="noopener">Markus Winkler</a> / Unsplash
+  </p>
 </footer>
 
 <script>
@@ -469,7 +718,6 @@
     document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
   }
 
-  // Auto-detect from browser language
   const browserLang = navigator.language || navigator.userLanguage;
   if (browserLang && !browserLang.startsWith('he') && !browserLang.startsWith('ar')) {
     setLang('en');
